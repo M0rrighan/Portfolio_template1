@@ -47,7 +47,7 @@ function toggleMenu() {
 menuBtn.addEventListener('click', toggleMenu);
 menuBtn.addEventListener('touchstart', toggleMenu);
 
-if (menu.style.display !== 'none' && menu.style.display !== 'inline-flex') {
+if (menu.style.display !== 'inline-flex' && menu.style.display !== 'none') {
   for (let i = 0; i < navLinks.length; i += 1) {
     navLinks[i].addEventListener('click', hideMenu);
     navLinks[i].addEventListener('touchstart', hideMenu);
