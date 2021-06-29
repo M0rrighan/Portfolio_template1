@@ -1,4 +1,3 @@
-//const smallScreen = !window.matchMedia('only screen and (min-width: 992px)').matches;
 const body = document.getElementsByTagName('body')[0];
 const logo = document.querySelector('.logo_placeholder');
 const nav = document.querySelector('nav');
