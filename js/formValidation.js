@@ -47,17 +47,9 @@ const ourString = JSON.stringify(formData);
 function storeInfo() {
   if (localStorage.getItem('ourData') !== ourString) {
     localStorage.setItem('ourData', ourString);
+  } else {
+    getInfo();
   }
-}
-
-//Gets the info and presets values to form input fields
-function getInfo() {
-  const recievedObject = localStorage.getItem('ourData');
-  const parseString = JSON.parse(recievedObject);
-
-  document.getElementById('name').value = parseString.name;
-  document.getElementById('email').value = parseString.email;
-  document.getElementById('message').value = parseString.msg;
 }
 
 // Function to check if email input is lowercase
