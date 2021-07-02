@@ -40,7 +40,25 @@ msg.addEventListener('change', (event) => {
   populateFormData(event.target.value, 'm');
 });
 
+//Checks in formData exist on the local storage
+//If not, formData is added to the local storage
+const ourString = JSON.stringify(formData);
 
+function storeInfo() {
+  if (localStorage.getItem('ourData') !== ourString) {
+    localStorage.setItem('ourData', ourString);
+  }
+}
+
+//Gets the info and presets values to form input fields
+function getInfo() {
+  const recievedObject = localStorage.getItem('ourData');
+  const parseString = JSON.parse(recievedObject);
+
+  document.getElementById('name').value = parseString.name;
+  document.getElementById('email').value = parseString.email;
+  document.getElementById('message').value = parseString.msg;
+}
 
 // Function to check if email input is lowercase
 // Alert if email input needs to be changed
@@ -54,5 +72,8 @@ cForm.addEventListener('submit', (e) => {
     e.preventDefault();
   } else {
     alertMsg.classList.remove('active');
+    storeInfo();
   }
 });
+
+getInfo();
