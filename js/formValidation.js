@@ -40,8 +40,8 @@ msg.addEventListener('change', (event) => {
   populateFormData(event.target.value, 'm');
 });
 
-function getInfo() {
-  const receivedObject = localStorage.getItem('ourData');
+function retreiveAndPreSet() {
+  const receivedObject = localStorage.getItem('contactFormData');
   const parsedObject = JSON.parse(receivedObject);
   username.value = parsedObject.inputName;
   email.value = parsedObject.inputEmail;
@@ -51,13 +51,11 @@ function getInfo() {
 // Checks in formData exist on the local storage
 // If not, formData is added to the local storage
 
- let formDataToString = '';
+function storeFormData() {
+  const formDataToString = JSON.stringify(formData);
 
-function storeInfo() {
-  formDataToString = JSON.stringify(formData);
-
-  if (localStorage.getItem('ourData') !== formDataToString) {
-    localStorage.setItem('ourData', formDataToString);
+  if (localStorage.getItem('contactFormData') !== formDataToString) {
+    localStorage.setItem('contactFormData', formDataToString);
   }
 }
 
@@ -73,8 +71,8 @@ cForm.addEventListener('submit', (e) => {
     e.preventDefault();
   } else {
     alertMsg.classList.remove('active');
-    storeInfo();
+    storeFormData();
   }
 });
 
-getInfo();
+retreiveAndPreSet();
