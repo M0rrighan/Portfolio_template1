@@ -26,7 +26,7 @@ function populateFormData(value, itemName) {
   } else if (itemName === 'm') {
     formData.inputMessage = value;
   } else {
-    console.log('Invalid attribute name for given value');
+    throw new Error('Invalid attribute name for given value');
   }
 }
 
@@ -40,15 +40,24 @@ msg.addEventListener('change', (event) => {
   populateFormData(event.target.value, 'm');
 });
 
-//Checks in formData exist on the local storage
-//If not, formData is added to the local storage
-const ourString = JSON.stringify(formData);
+function getInfo() {
+  const receivedObject = localStorage.getItem('ourData');
+  const parsedObject = JSON.parse(receivedObject);
+  username.value = parsedObject.inputName;
+  email.value = parsedObject.inputEmail;
+  msg.value = parsedObject.inputMessage;
+}
+
+// Checks in formData exist on the local storage
+// If not, formData is added to the local storage
+
+ let formDataToString = '';
 
 function storeInfo() {
-  if (localStorage.getItem('ourData') !== ourString) {
-    localStorage.setItem('ourData', ourString);
-  } else {
-    getInfo();
+  formDataToString = JSON.stringify(formData);
+
+  if (localStorage.getItem('ourData') !== formDataToString) {
+    localStorage.setItem('ourData', formDataToString);
   }
 }
 
